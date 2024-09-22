@@ -1,0 +1,37 @@
+version: '3'
+services:
+  mongo:
+    container_name: mongodb-container
+    image: mongo
+    ports:
+      - '27017:27017'
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: adminPassword
+      MONGO_INITDB_DATABASE: myDatabase
+    networks:
+      - mern-network
+
+  backend:
+    container_name: backend-container
+    build: ./backend
+    image: backend-image
+    ports:
+      - '5000:5000'
+    env_file:
+      - ./backend/.env
+    networks:
+      - mern-network
+
+  frontend:
+    container_name: frontend-container
+    build: ./frontend
+    image: frontend-image
+    ports:
+      - '8080:80'
+    networks:
+      - mern-network
+
+networks:
+  mern-network:
+    driver: bridge
