@@ -8,7 +8,7 @@ dotenv.config();
 
 // Initialize the app
 const app = express();
-app.use(cors({ origin: 'http://localhost:8080' })); // Adjust as needed
+app.use(cors()); // Allow all origins
 app.use(express.json());
 
 // Connect to MongoDB
